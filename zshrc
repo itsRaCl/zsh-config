@@ -13,6 +13,8 @@ antigen bundle command-not-found
 
 antigen bundle zsh-users/zsh-syntax-highlighting
 antigen bundle zsh-users/zsh-autosuggestions
+antigen bundle zsh-users/zsh-history-substring-search
+antigen bundle zsh-users/zsh-completions
 
 antigen theme aussiegeek
 
@@ -24,4 +26,11 @@ export PATH="$PATH:/home/racl/.local/bin"
 autoload -U bashcompinit
 bashcompinit
 
-eval "$(register-python-argcomplete pipx)"
+
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '/home/racl/tmp/google-cloud-sdk/path.zsh.inc' ]; then . '/home/racl/tmp/google-cloud-sdk/path.zsh.inc'; fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f '/home/racl/tmp/google-cloud-sdk/completion.zsh.inc' ]; then . '/home/racl/tmp/google-cloud-sdk/completion.zsh.inc'; fi
+
+bindkey -v

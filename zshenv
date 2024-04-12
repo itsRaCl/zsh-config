@@ -1,10 +1,23 @@
 export EDITOR=nvim
+export PKGEXT=".pkg.tar"
+export QT_QPA_PLATFORMTHEME=qt5ct
+export CHROME_EXECUTABLE=chromium
+export JAVA_HOME=/usr/lib/jvm/java-17-openjdk/
+export PATH="$PATH:/home/racl/.flutter_bin/flutter/bin"
+export ANDROID_SDK_ROOT='/opt/android-sdk'
+export PATH=$PATH:$ANDROID_SDK_ROOT/cmdline-tools/latest/bin/
+export PATH=$PATH:$ANDROID_SDK_ROOT/platform-tools/
+export PATH=$PATH:$ANDROID_SDK_ROOT/tools/bin/
+export PATH=$PATH:$ANDROID_ROOT/emulator
+export PATH=$PATH:$ANDROID_SDK_ROOT/tools/
+export PATH="$PATH":"$HOME/.pub-cache/bin"
 
 alias nvim=nvim .
 alias vim=nvim
 alias mux=tmuxinator
 alias generate_pwd="python ~/code/personal/scripts/generate_password.py"
 alias split_pdf="source ~/code/venv/scripts/bin/activate && python ~/code/personal/scripts/trim_pages.py"
+alias i3lock="i3lock -k -B 9 -e -f --indicator --inside-color=f38ba8 --ring-color=f38ba8 --keyhl-color=a6e3a1 --insidever-color=89b4fa --ringver-color=89b4fa"
 
 
 
@@ -15,9 +28,14 @@ venv() {
     source ~/code/venv/$DIRECTORY/bin/activate
 }
 
-create_venv(){
-    echo "creating venv $1"
+latest_venv(){
+    echo "creating venv $1 with latest python version"
     python -m venv ~/code/venv/$1
+}
+
+38_venv(){
+    echo "creating venv $1 with python version 3.8"
+    python3.8 -m venv ~/code/venv/$1
 }
 
 wifi_login() {
@@ -31,31 +49,3 @@ code(){
     DIRECTORY=$(echo $(basename $(pwd)))
     mux $DIRECTORY
 }
-
-handout() {
-    if [ $1 = "m3" ]; then
-        zathura "~/study/2-1/M3 MATH F211/M3 Handout (MATH F211).pdf" &
-    elif [ $1 = "disco" ]; then
-        zathura "~/study/2-1/DISCO CS F222/DISCO Handout (CS F222).pdf" &
-    elif [ $1 = "lics" ]; then
-        zathura "~/study/2-1/LICS CS F214/LICS Handout (CS F214).pdf" &
-    elif [ $1 = "dd" ]; then
-        zathura "~/study/2-1/DD CS F215/DD Handout (CS F215).pdf" &
-    elif [ $1 = "oop" ]; then
-        zathura "~/study/2-1/OOP CS F213/OOP Handout (CS F213).pdf" &
-    fi
-}
-tb() {
-    if [ $1 = "m3" ]; then
-        zathura "~/study/2-1/M3 MATH F211/M3 Textbook.pdf" &
-    elif [ $1 = "disco" ]; then
-        zathura "~/study/2-1/DISCO CS F222/DISCO RB1.pdf" &
-    elif [ $1 = "lics" ]; then
-        zathura "~/study/2-1/LICS CS F214/LICS Textbook.pdf" &
-    elif [ $1 = "dd" ]; then
-        zathura "~/study/2-1/DD CS F215/DD Textbook.pdf" &
-    elif [ $1 = "oop" ]; then
-        zathura "~/study/2-1/OOP CS F213/OOP Textbook.pdf" &
-    fi
-}
-
