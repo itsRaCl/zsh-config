@@ -1,15 +1,17 @@
 export EDITOR=nvim
 export PKGEXT=".pkg.tar"
-export QT_QPA_PLATFORMTHEME=qt5ct
+export XDG_CURRENT_DESKTOP="GNOME"
+export QT_QPA_PLATFORMTHEME="qt5ct"
 export CHROME_EXECUTABLE=chromium
 export JAVA_HOME=/usr/lib/jvm/java-17-openjdk/
 export PATH="$PATH:/home/racl/.flutter_bin/flutter/bin"
 export ANDROID_SDK_ROOT='/opt/android-sdk'
-export PATH=$PATH:$ANDROID_SDK_ROOT/cmdline-tools/latest/bin/
-export PATH=$PATH:$ANDROID_SDK_ROOT/platform-tools/
-export PATH=$PATH:$ANDROID_SDK_ROOT/tools/bin/
-export PATH=$PATH:$ANDROID_ROOT/emulator
-export PATH=$PATH:$ANDROID_SDK_ROOT/tools/
+export ANDROID_HOME='/opt/android-sdk'
+export PATH=$PATH:$ANDROID_HOME/cmdline-tools/latest/bin
+export PATH=$PATH:$ANDROID_HOME/platform-tools
+export PATH=$PATH:$ANDROID_HOME/tools/bin
+export PATH=$PATH:$ANDROID_HOME/emulator
+export PATH=$PATH:$ANDROID_HOME/tools
 export PATH="$PATH":"$HOME/.pub-cache/bin"
 
 alias nvim=nvim .
@@ -23,9 +25,23 @@ alias i3lock="i3lock -k -B 9 -e -f --indicator --inside-color=f38ba8 --ring-colo
 
 
 venv() {
-    DIRECTORY=$(echo $(basename $(pwd)))
-    echo "Activating virtual environment $DIRECTORY"
-    source ~/code/venv/$DIRECTORY/bin/activate
+	VENV_DIR=~/code/venv
+
+	if [[ $1 ]];
+	then
+		DIRECTORY_NAME=$1
+	else
+		DIRECTORY_NAME=$(echo $(basename $(pwd)))
+	fi
+
+	FILE_PATH=$VENV_DIR/$DIRECTORY_NAME/bin/activate
+	 if [ -e $FILE_PATH ];
+	 then 
+		 echo "Activating virtual environment $DIRECTORY_NAME"
+		 source $FILE_PATH
+	 else
+		 echo "No such venv exists ($DIRECTORY_NAME)"
+	 fi
 }
 
 latest_venv(){
@@ -49,3 +65,4 @@ code(){
     DIRECTORY=$(echo $(basename $(pwd)))
     mux $DIRECTORY
 }
+. "$HOME/.cargo/env"

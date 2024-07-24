@@ -19,12 +19,10 @@ antigen bundle zsh-users/zsh-completions
 antigen theme aussiegeek
 
 antigen apply
+fpath+=~/.zfunc
 
 # Created by `pipx` on 2023-12-31 18:58:49
 export PATH="$PATH:/home/racl/.local/bin"
-
-autoload -U bashcompinit
-bashcompinit
 
 
 # The next line updates PATH for the Google Cloud SDK.
